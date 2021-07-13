@@ -1,0 +1,15 @@
+<html>
+    <head>
+    </head>
+    <body>
+        {% if anagrams %}
+            <ul>
+                {% for word in anagrams %}
+                    <li>{{word}}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>The word does not have an anagram</p>
+        {% endif %}
+    </body>
+</html>
