@@ -15,6 +15,28 @@ def start(word):
     return render_template('index.html', anagrams=list_of_anagrams)
 
 
+@app.route('/dictionary')
+def dictionari():
+    alphabet = 'abcdefghijklmnopqrstuv'
+    return render_template('dictionary.html', count=0, is_a_word=False, alphabet=alphabet, cur_word='')
+
+
+@app.route('/dictionary/<cur_word>')
+def dictionary(cur_word):
+    count = 0
+    alphabet = 'abcdefghijklmnopqrstuv'
+    with open('words.txt') as f:
+        lines = f.readlines()
+        for line in lines:
+            if cur_word.upper() == line.strip():
+                return render_template('dictionary.html', count=count, is_a_word=True, alphabet=alphabet, cur_word=cur_word)
+            elif line.strip().startswith(cur_word.upper()):
+                count += 1
+    return render_template('dictionary.html', count=count, is_a_word=False, alphabet=alphabet, cur_word=cur_word)
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 

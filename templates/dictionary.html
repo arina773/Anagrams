@@ -1,0 +1,32 @@
+<html>
+    <head>
+    </head>
+    <body>
+        {%if cur_word%}
+            {% if is_a_word  %}
+                <p>{{cur_word}} is a REAL word</p>
+            {% elif count > 0 %}
+                <p>{{count}} words with prefix {{cur_word}}</p>
+                <ul>
+                    {% for letter in alphabet %}
+                        {% set cur_wordd = cur_word + letter%}
+                        <li>
+                            <a href="{{url_for('dictionary', cur_word=cur_wordd)}}"> {{cur_wordd}} </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            {% elif count == 0 %}
+                <p>The word {{cur_word}} does not have an anagram</p>
+            {% endif %}
+        {% else %}
+            <ul>
+                {% for letter in alphabet %}
+                    <li>
+                        <a href="{{url_for('dictionary', cur_word=letter)}}"> {{letter}} </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </body>
+</html>
