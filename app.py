@@ -25,16 +25,14 @@ def dictionari():
 def dictionary(cur_word):
     count = 0
     alphabet = 'abcdefghijklmnopqrstuv'
-    with open('words.txt') as f:
+    with open('words_dict.txt') as f:
         lines = f.readlines()
         for line in lines:
-            if cur_word.upper() == line.strip():
+            if cur_word.upper() == line.strip().upper():
                 return render_template('dictionary.html', count=count, is_a_word=True, alphabet=alphabet, cur_word=cur_word)
-            elif line.strip().startswith(cur_word.upper()):
+            elif line.strip().upper().startswith(cur_word.upper()):
                 count += 1
     return render_template('dictionary.html', count=count, is_a_word=False, alphabet=alphabet, cur_word=cur_word)
-
-
 
 
 if __name__ == '__main__':
